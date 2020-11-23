@@ -55,8 +55,11 @@ const entityContact = (sequelize, DataTypes) => {
 
     return entries
   }
-
+  
   return EntityContact
 }
+
+
+
 
 export default entityContact

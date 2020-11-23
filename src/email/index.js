@@ -19,6 +19,7 @@ const transporter = nodemailer.createTransport({
  * @param {string} text  plain text of the email
  */
 const sendMail = async (to, subject, html, text) => {
+  console.log('Sendig email to ', to)
   try {
     await transporter.sendMail({
       from: `"Healthcare Roll Call" <${process.env.SMTP_USER}>`, // sender address
@@ -45,8 +46,8 @@ const sendForgotPassword = async (userEmail, resetPasswordToken) => {
     await sendMail(
       userEmail,
       'Password Reset - Healthcare Roll Call',
-      nunjucks.render('forgot_password_html.njk', {emailResetLink}),
-      nunjucks.render('forgot_password_text.njk', {emailResetLink})
+      nunjucks.render('forgot_password_html.njk', { emailResetLink }),
+      nunjucks.render('forgot_password_text.njk', { emailResetLink })
     )
     return true
   } catch (e) {
@@ -74,4 +75,4 @@ const sendContactCheckInEmail = async (info) => {
   }
 }
 
-export default {sendForgotPassword, sendContactCheckInEmail}
+export default { sendForgotPassword, sendContactCheckInEmail }
