@@ -168,8 +168,12 @@ router.post('/send', async (req, res) => {
         }]
       }
 
-      if (entityType !== undefined) {
-        whereClause.include[0].where = {type: entityType}
+      if (relationshipTitle) {
+        whereClause.include[0].through.where = {relationshipTitle: relationshipTitle}
+      }
+
+      if (entityType) {
+        whereClause.include[0].where = {type:  entityType}
       }
 
       const contacts = await models.Contact.findAll(whereClause)
